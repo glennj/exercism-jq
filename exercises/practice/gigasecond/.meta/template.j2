@@ -4,10 +4,10 @@
 export TZ=UTC
 {% for case in cases %}
 @test '{{ case["description"] }}' {
-  {% if loop.first %}# {% endif %}[[ $BATS_RUN_SKIPPED == "true" ]] || skip
-  run jq -r -f {{ solution }} <<< {{ case["input"] | tojson(separators=None) | quote }}
+    {% if loop.first %}# {% endif %}[[ $BATS_RUN_SKIPPED == "true" ]] || skip
+    run jq -r -f {{ solution }} <<< {{ case["input"] | tojson(separators=None) | quote }}
 
-  assert_success
-  assert_output "{{ case["expected"] }}"
+    assert_success
+    assert_output "{{ case["expected"] }}"
 }
 {% endfor %}
